@@ -49,7 +49,7 @@ func SprintfDict(pattern string, dict map[string]interface{}) string {
 
 func ProcessVar(pattern, key string, val interface{}) string {
 	varPattern := varPatternLeft + key + varPatternRight
-	return strings.Replace(pattern, varPattern, fmt.Sprintf("%s", val), -1)
+	return strings.Replace(pattern, varPattern, fmt.Sprintf("%v", val), -1)
 }
 
 const randomStrOptions = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
