@@ -18,12 +18,12 @@ package testcases
 
 import (
 	"context"
-	"github.com/rulego/rulego/api/types"
+	"github.com/2018yuli/rulego/api/types"
 	"strings"
 	"time"
 )
 
-//UpperNode A plugin that converts the message data to uppercase
+// UpperNode A plugin that converts the message data to uppercase
 type UpperNode struct{}
 
 func (n *UpperNode) Type() string {

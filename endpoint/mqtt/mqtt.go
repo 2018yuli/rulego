@@ -17,16 +17,16 @@
 package mqtt
 
 import (
+	"github.com/2018yuli/rulego/api/types"
+	"github.com/2018yuli/rulego/components/mqtt"
+	"github.com/2018yuli/rulego/endpoint"
+	"github.com/2018yuli/rulego/utils/maps"
 	paho "github.com/eclipse/paho.mqtt.golang"
-	"github.com/rulego/rulego/api/types"
-	"github.com/rulego/rulego/components/mqtt"
-	"github.com/rulego/rulego/endpoint"
-	"github.com/rulego/rulego/utils/maps"
 	"net/textproto"
 	"strconv"
 )
 
-//RequestMessage http请求消息
+// RequestMessage http请求消息
 type RequestMessage struct {
 	request paho.Message
 	msg     *types.RuleMsg
@@ -74,7 +74,7 @@ func (r *RequestMessage) Request() paho.Message {
 	return r.request
 }
 
-//ResponseMessage http响应消息
+// ResponseMessage http响应消息
 type ResponseMessage struct {
 	request  paho.Message
 	response paho.Client
@@ -131,7 +131,7 @@ func (r *ResponseMessage) Response() paho.Client {
 	return r.response
 }
 
-//Mqtt MQTT 接收端端点
+// Mqtt MQTT 接收端端点
 type Mqtt struct {
 	endpoint.BaseEndpoint
 	RuleConfig types.Config
@@ -139,7 +139,7 @@ type Mqtt struct {
 	client     *mqtt.Client
 }
 
-//Type 组件类型
+// Type 组件类型
 func (m *Mqtt) Type() string {
 	return "mqtt"
 }
@@ -148,14 +148,14 @@ func (m *Mqtt) New() types.Node {
 	return &Mqtt{}
 }
 
-//Init 初始化
+// Init 初始化
 func (m *Mqtt) Init(ruleConfig types.Config, configuration types.Configuration) error {
 	err := maps.Map2Struct(configuration, &m.Config)
 	m.RuleConfig = ruleConfig
 	return err
 }
 
-//Destroy 销毁
+// Destroy 销毁
 func (m *Mqtt) Destroy() {
 	_ = m.Close()
 }
@@ -181,7 +181,7 @@ func (m *Mqtt) RemoveRouterWithParams(from string, params ...interface{}) error 
 	return m.client.UnregisterHandler(from)
 }
 
-//AddRouter 添加路由
+// AddRouter 添加路由
 func (m *Mqtt) AddRouter(routers ...*endpoint.Router) *Mqtt {
 	m.saveRouter(routers...)
 	//服务已经启动
@@ -221,7 +221,7 @@ func (m *Mqtt) Start() error {
 	return nil
 }
 
-//存储路由
+// 存储路由
 func (m *Mqtt) saveRouter(routers ...*endpoint.Router) {
 	m.Lock()
 	defer m.Unlock()
@@ -233,7 +233,7 @@ func (m *Mqtt) saveRouter(routers ...*endpoint.Router) {
 	}
 }
 
-//从存储器中删除路由
+// 从存储器中删除路由
 func (m *Mqtt) deleteRouter(from string) {
 	m.Lock()
 	defer m.Unlock()

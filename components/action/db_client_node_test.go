@@ -18,21 +18,21 @@ package action
 
 import (
 	"fmt"
-	"github.com/rulego/rulego/api/types"
-	"github.com/rulego/rulego/test"
-	"github.com/rulego/rulego/test/assert"
-	"github.com/rulego/rulego/utils/json"
-	"github.com/rulego/rulego/utils/str"
+	"github.com/2018yuli/rulego/api/types"
+	"github.com/2018yuli/rulego/test"
+	"github.com/2018yuli/rulego/test/assert"
+	"github.com/2018yuli/rulego/utils/json"
+	"github.com/2018yuli/rulego/utils/str"
 	"testing"
 	"time"
 )
 
-//测试mysql增删修改查
+// 测试mysql增删修改查
 func TestMysqlDbClientNodeOnMsg(t *testing.T) {
 	testDbClientNodeOnMsg(t, "mysql", "root:root@tcp(127.0.0.1:3306)/test")
 }
 
-//测试postgres增删修改查
+// 测试postgres增删修改查
 func TestPgDbClientNodeOnMsg(t *testing.T) {
 	testDbClientNodeOnMsg(t, "postgres", "postgres://postgres:postgres@127.0.0.1:5432/test?sslmode=disable")
 }

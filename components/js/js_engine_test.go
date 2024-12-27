@@ -17,8 +17,8 @@
 package js
 
 import (
-	"github.com/rulego/rulego"
-	"github.com/rulego/rulego/test/assert"
+	"github.com/2018yuli/rulego"
+	"github.com/2018yuli/rulego/test/assert"
 	"sync"
 	"testing"
 	"time"

@@ -18,13 +18,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/rulego/rulego"
-	"github.com/rulego/rulego/api/types"
+	"github.com/2018yuli/rulego"
+	"github.com/2018yuli/rulego/api/types"
 	"time"
 )
 
-//热更新规则链，不需要启动服务，立刻生效
-//热更新规则链某个节点，不需要启动服务，立刻生效
+// 热更新规则链，不需要启动服务，立刻生效
+// 热更新规则链某个节点，不需要启动服务，立刻生效
 func main() {
 
 	config := rulego.NewConfig()

@@ -19,7 +19,7 @@ package rulego
 import (
 	"context"
 	"fmt"
-	"github.com/rulego/rulego/api/types"
+	"github.com/2018yuli/rulego/api/types"
 	"sync"
 )
 
@@ -31,8 +31,8 @@ type RelationCache struct {
 }
 
 // RuleChainCtx 规则链实例定义
-//初始化所有节点
-//记录规则链，所有节点路由关系
+// 初始化所有节点
+// 记录规则链，所有节点路由关系
 type RuleChainCtx struct {
 	//节点ID
 	Id types.RuleNodeId
@@ -58,7 +58,7 @@ type RuleChainCtx struct {
 	sync.RWMutex
 }
 
-//InitRuleChainCtx 初始化RuleChainCtx
+// InitRuleChainCtx 初始化RuleChainCtx
 func InitRuleChainCtx(config types.Config, ruleChainDef *RuleChain) (*RuleChainCtx, error) {
 	var ruleChainCtx = &RuleChainCtx{
 		Config:             config,
@@ -151,7 +151,7 @@ func (rc *RuleChainCtx) GetNodeByIndex(index int) (types.NodeCtx, bool) {
 	return rc.GetNodeById(rc.nodeIds[index])
 }
 
-//GetFirstNode 获取第一个节点，消息从该节点开始流转。默认是index=0的节点
+// GetFirstNode 获取第一个节点，消息从该节点开始流转。默认是index=0的节点
 func (rc *RuleChainCtx) GetFirstNode() (types.NodeCtx, bool) {
 	var firstNodeIndex = rc.SelfDefinition.Metadata.FirstNodeIndex
 	return rc.GetNodeByIndex(firstNodeIndex)
@@ -197,7 +197,7 @@ func (rc *RuleChainCtx) GetNextNodes(id types.RuleNodeId, relationType string) (
 }
 
 // AddSubRuleChainCtx 添加/更新子规则链
-//如果存在则先销毁，再覆盖
+// 如果存在则先销毁，再覆盖
 func (rc *RuleChainCtx) AddSubRuleChainCtx(ruleChainId types.RuleNodeId, ctx *RuleChainCtx) {
 	if node, ok := rc.GetNodeById(ruleChainId); ok {
 		//先销毁

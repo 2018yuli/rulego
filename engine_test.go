@@ -33,8 +33,8 @@ package rulego
  */
 
 import (
-	"github.com/rulego/rulego/api/types"
-	"github.com/rulego/rulego/test/assert"
+	"github.com/2018yuli/rulego/api/types"
+	"github.com/2018yuli/rulego/test/assert"
 	"strings"
 	"testing"
 )
@@ -134,7 +134,7 @@ var s1NodeFile = `
 		  }
 `
 
-//TestEngine 测试规则引擎
+// TestEngine 测试规则引擎
 func TestEngine(t *testing.T) {
 	config := NewConfig()
 	ruleEngine, err := New("rule01", []byte(rootRuleChain), WithConfig(config), WithAddSubChain("subChain01", []byte(subRuleChain)))

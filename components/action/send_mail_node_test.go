@@ -17,9 +17,9 @@
 package action
 
 import (
-	"github.com/rulego/rulego/api/types"
-	"github.com/rulego/rulego/test"
-	"github.com/rulego/rulego/utils/maps"
+	"github.com/2018yuli/rulego/api/types"
+	"github.com/2018yuli/rulego/test"
+	"github.com/2018yuli/rulego/utils/maps"
 	"sync"
 	"testing"
 )

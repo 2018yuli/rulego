@@ -19,21 +19,21 @@ package rulego
 import (
 	"errors"
 	"fmt"
-	"github.com/rulego/rulego/api/types"
-	"github.com/rulego/rulego/components/action"
-	"github.com/rulego/rulego/components/filter"
-	"github.com/rulego/rulego/components/transform"
+	"github.com/2018yuli/rulego/api/types"
+	"github.com/2018yuli/rulego/components/action"
+	"github.com/2018yuli/rulego/components/filter"
+	"github.com/2018yuli/rulego/components/transform"
 	"plugin"
 	"sync"
 )
 
-//PluginsSymbol 插件检查点 Symbol
+// PluginsSymbol 插件检查点 Symbol
 const PluginsSymbol = "Plugins"
 
-//Registry 规则引擎组件默认注册器
+// Registry 规则引擎组件默认注册器
 var Registry = new(RuleComponentRegistry)
 
-//注册默认组件
+// 注册默认组件
 func init() {
 	var components []types.Node
 	components = append(components, action.Registry.Components()...)
@@ -46,7 +46,7 @@ func init() {
 	}
 }
 
-//RuleComponentRegistry 组件注册器
+// RuleComponentRegistry 组件注册器
 type RuleComponentRegistry struct {
 	//规则引擎节点组件列表
 	components map[string]types.Node
@@ -55,7 +55,7 @@ type RuleComponentRegistry struct {
 	sync.RWMutex
 }
 
-//Register 注册规则引擎节点组件
+// Register 注册规则引擎节点组件
 func (r *RuleComponentRegistry) Register(node types.Node) error {
 	r.Lock()
 	defer r.Unlock()
@@ -70,7 +70,7 @@ func (r *RuleComponentRegistry) Register(node types.Node) error {
 	return nil
 }
 
-//RegisterPlugin 注册规则引擎节点组件
+// RegisterPlugin 注册规则引擎节点组件
 func (r *RuleComponentRegistry) RegisterPlugin(name string, file string) error {
 	builder := &PluginComponentRegistry{name: name, file: file}
 	if err := builder.Init(); err != nil {
@@ -125,7 +125,7 @@ func (r *RuleComponentRegistry) Unregister(componentType string) error {
 	}
 }
 
-//NewNode 获取规则引擎节点组件
+// NewNode 获取规则引擎节点组件
 func (r *RuleComponentRegistry) NewNode(nodeType string) (types.Node, error) {
 	r.RLock()
 	defer r.RUnlock()
@@ -147,7 +147,7 @@ func (r *RuleComponentRegistry) GetComponents() map[string]types.Node {
 	return components
 }
 
-//PluginComponentRegistry go plugin组件初始化器
+// PluginComponentRegistry go plugin组件初始化器
 type PluginComponentRegistry struct {
 	name     string
 	file     string

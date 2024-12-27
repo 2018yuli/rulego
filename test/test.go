@@ -18,14 +18,14 @@ package test
 
 import (
 	"context"
-	"github.com/rulego/rulego/api/types"
+	"github.com/2018yuli/rulego/api/types"
 	"time"
 )
 
-//NodeTestRuleContext
-//只为测试单节点，临时创建的上下文
-//无法把多个节点组成链式
-//callback 回调处理结果
+// NodeTestRuleContext
+// 只为测试单节点，临时创建的上下文
+// 无法把多个节点组成链式
+// callback 回调处理结果
 type NodeTestRuleContext struct {
 	config   types.Config
 	context  context.Context

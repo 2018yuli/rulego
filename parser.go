@@ -17,11 +17,11 @@
 package rulego
 
 import (
-	"github.com/rulego/rulego/api/types"
-	string2 "github.com/rulego/rulego/utils/json"
+	"github.com/2018yuli/rulego/api/types"
+	string2 "github.com/2018yuli/rulego/utils/json"
 )
 
-//JsonParser Json
+// JsonParser Json
 type JsonParser struct {
 }
 

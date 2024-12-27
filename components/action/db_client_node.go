@@ -19,15 +19,15 @@ package action
 import (
 	"database/sql"
 	"fmt"
+	"github.com/2018yuli/rulego/api/types"
+	"github.com/2018yuli/rulego/utils/maps"
+	"github.com/2018yuli/rulego/utils/str"
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
-	"github.com/rulego/rulego/api/types"
-	"github.com/rulego/rulego/utils/maps"
-	"github.com/rulego/rulego/utils/str"
 	"strings"
 )
 
-//注册节点
+// 注册节点
 func init() {
 	Registry.Add(&DbClientNode{})
 }

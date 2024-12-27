@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/rulego/rulego"
-	"github.com/rulego/rulego/api/types"
-	string2 "github.com/rulego/rulego/utils/str"
+	"github.com/2018yuli/rulego"
+	"github.com/2018yuli/rulego/api/types"
+	string2 "github.com/2018yuli/rulego/utils/str"
 	"time"
 )
 
@@ -14,9 +14,9 @@ var (
 	shareValue = "shareValue"
 )
 
-//测试插件，需要在linux运行
-//先编译plugin.go
-//go build -buildmode=plugin -o plugin.so plugin.go
+// 测试插件，需要在linux运行
+// 先编译plugin.go
+// go build -buildmode=plugin -o plugin.so plugin.go
 func main() {
 	_ = rulego.Registry.Unregister("test")
 	//注册插件组件

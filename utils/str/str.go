@@ -18,7 +18,7 @@ package str
 
 import (
 	"fmt"
-	"github.com/rulego/rulego/utils/json"
+	"github.com/2018yuli/rulego/utils/json"
 	"math/rand"
 	"strconv"
 	"strings"
@@ -34,11 +34,11 @@ func init() {
 }
 
 // SprintfDict formats a string according to a pattern and a dictionary of variables.
-//The pattern is a string that contains placeholders for the variables in the form of ${key}.
-//The dict is a map from keys to values that will replace the placeholders.
-//For example, SprintfDict(“Hello, ${name}!”, map[string]string{“name”: “Alice”}) returns “Hello, Alice!”.
-//If the pattern contains a key that is not in the dict, it will be left unchanged.
-//If the dict contains a key that is not in the pattern, it will be ignored.
+// The pattern is a string that contains placeholders for the variables in the form of ${key}.
+// The dict is a map from keys to values that will replace the placeholders.
+// For example, SprintfDict(“Hello, ${name}!”, map[string]string{“name”: “Alice”}) returns “Hello, Alice!”.
+// If the pattern contains a key that is not in the dict, it will be left unchanged.
+// If the dict contains a key that is not in the pattern, it will be ignored.
 func SprintfDict(pattern string, dict map[string]string) string {
 	var result = pattern
 	for key, value := range dict {
@@ -55,7 +55,7 @@ func ProcessVar(pattern, key, val string) string {
 const randomStrOptions = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 const randomStrOptionsLen = len(randomStrOptions)
 
-//RandomStr 创建指定长度的随机字符
+// RandomStr 创建指定长度的随机字符
 func RandomStr(num int) string {
 	var builder strings.Builder
 	for i := 0; i < num; i++ {
@@ -115,7 +115,7 @@ func ToString(input interface{}) string {
 	}
 }
 
-//ToStringMapString 把interface类型 转 map[string]string类型
+// ToStringMapString 把interface类型 转 map[string]string类型
 func ToStringMapString(input interface{}) map[string]string {
 	var output = map[string]string{}
 
@@ -145,12 +145,12 @@ func ToStringMapString(input interface{}) map[string]string {
 	}
 }
 
-//CheckHasVar 检查字符串是否有占位符
+// CheckHasVar 检查字符串是否有占位符
 func CheckHasVar(str string) bool {
 	return strings.Contains(str, "${") && strings.Contains(str, "}")
 }
 
-//ConvertDollarPlaceholder 转postgres风格占位符
+// ConvertDollarPlaceholder 转postgres风格占位符
 func ConvertDollarPlaceholder(sql, dbType string) string {
 	if dbType == "postgres" {
 		n := 1
@@ -162,7 +162,7 @@ func ConvertDollarPlaceholder(sql, dbType string) string {
 	return sql
 }
 
-//RemoveBraces A function that takes a string with ${} and returns a string without them
+// RemoveBraces A function that takes a string with ${} and returns a string without them
 func RemoveBraces(s string) string {
 	// Create a new empty string
 	result := ""

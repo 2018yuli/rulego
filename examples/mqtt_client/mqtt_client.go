@@ -18,13 +18,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/rulego/rulego"
-	"github.com/rulego/rulego/api/types"
+	"github.com/2018yuli/rulego"
+	"github.com/2018yuli/rulego/api/types"
 	"time"
 )
 
-//数据经过js转换后，增加deviceId变量，然后往主题 topic: /device/msg/${deviceId}发送处理后msg数据
-//其中${deviceId}为元数据的变量
+// 数据经过js转换后，增加deviceId变量，然后往主题 topic: /device/msg/${deviceId}发送处理后msg数据
+// 其中${deviceId}为元数据的变量
 func main() {
 
 	config := rulego.NewConfig()

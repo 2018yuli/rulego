@@ -19,8 +19,8 @@ package mqtt
 import (
 	"crypto/tls"
 	"crypto/x509"
+	string2 "github.com/2018yuli/rulego/utils/str"
 	paho "github.com/eclipse/paho.mqtt.golang"
-	string2 "github.com/rulego/rulego/utils/str"
 	"log"
 
 	"io/ioutil"
@@ -28,7 +28,7 @@ import (
 	"time"
 )
 
-//Handler 订阅数据处理器
+// Handler 订阅数据处理器
 type Handler struct {
 	//订阅主题
 	Topic string
@@ -38,7 +38,7 @@ type Handler struct {
 	Handle func(c paho.Client, data paho.Message)
 }
 
-//Config 客户端配置
+// Config 客户端配置
 type Config struct {
 	//mqtt broker 地址
 	Server string
@@ -57,7 +57,7 @@ type Config struct {
 	CertKeyFile string
 }
 
-//Client mqtt客户端
+// Client mqtt客户端
 type Client struct {
 	sync.RWMutex
 	wg     sync.WaitGroup
@@ -114,7 +114,7 @@ func NewClient(conf Config) (*Client, error) {
 	return &b, nil
 }
 
-//RegisterHandler 注册订阅数据处理器
+// RegisterHandler 注册订阅数据处理器
 func (b *Client) RegisterHandler(handler Handler) {
 	b.Lock()
 	defer b.Unlock()
@@ -122,7 +122,7 @@ func (b *Client) RegisterHandler(handler Handler) {
 	b.subscribeHandler(handler)
 }
 
-//UnregisterHandler 删除订阅数据处理器
+// UnregisterHandler 删除订阅数据处理器
 func (b *Client) UnregisterHandler(topic string) error {
 	if token := b.client.Unsubscribe(topic); token.Wait() && token.Error() != nil {
 		return token.Error()
@@ -134,7 +134,7 @@ func (b *Client) UnregisterHandler(topic string) error {
 	}
 }
 
-//GetHandlerByUpTopic 通过主题获取数据处理器
+// GetHandlerByUpTopic 通过主题获取数据处理器
 func (b *Client) GetHandlerByUpTopic(topic string) Handler {
 	b.RLock()
 	defer b.RUnlock()
@@ -148,7 +148,7 @@ func (b *Client) Close() error {
 	return nil
 }
 
-//Publish 发布数据
+// Publish 发布数据
 func (b *Client) Publish(topic string, qos byte, data []byte) error {
 	if token := b.client.Publish(topic, qos, false, data); token.Wait() && token.Error() != nil {
 		return token.Error()
@@ -183,7 +183,7 @@ func (b *Client) subscribeHandler(handler Handler) {
 	}
 }
 
-//判断是否是acl 128错误
+// 判断是否是acl 128错误
 func is128Err(token *paho.SubscribeToken, topic string) bool {
 	result, ok := token.Result()[topic]
 	return ok && result == 128

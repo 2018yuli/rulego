@@ -20,7 +20,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/rulego/rulego/api/types"
+	"github.com/2018yuli/rulego/api/types"
 	"time"
 )
 
@@ -44,7 +44,7 @@ type DefaultRuleContext struct {
 	context context.Context
 }
 
-//NewRuleContext 创建一个默认规则引擎消息处理上下文实例
+// NewRuleContext 创建一个默认规则引擎消息处理上下文实例
 func NewRuleContext(config types.Config, ruleChainCtx *RuleChainCtx, from types.NodeCtx, self types.NodeCtx, pool types.Pool, onEnd func(msg types.RuleMsg, err error), context context.Context) *DefaultRuleContext {
 	return &DefaultRuleContext{
 		config:       config,
@@ -174,7 +174,7 @@ func (ctx *DefaultRuleContext) tellNext(msg types.RuleMsg, nextNode types.NodeCt
 	}
 }
 
-//规则链执行完成回调函数
+// 规则链执行完成回调函数
 func (ctx *DefaultRuleContext) doOnEnd(msg types.RuleMsg, err error) {
 	//全局回调
 	//通过`Config.OnEnd`设置
@@ -193,7 +193,7 @@ func (ctx *DefaultRuleContext) doOnEnd(msg types.RuleMsg, err error) {
 }
 
 // RuleEngine 规则引擎
-//每个规则引擎实例只有一个根规则链，如果没设置规则链则无法处理数据
+// 每个规则引擎实例只有一个根规则链，如果没设置规则链则无法处理数据
 type RuleEngine struct {
 	//规则引擎实例标识
 	Id string
@@ -260,11 +260,11 @@ func (e *RuleEngine) ReloadSelf(def []byte, opts ...RuleEngineOption) error {
 }
 
 // ReloadChild 更新节点,包括根规则链下子节点、子规则链、子规则链下的子节点
-//子规则链不存则添加否则更新，子节点不存在更新不成功
-//如果chainId和ruleNodeId为空更新根规则链
-//chainId 子规则链，如果空，则表示更新根规则链
-//ruleNodeId 要更新的子节点或者子规则链
-//dsl 子节点/子规则链配置
+// 子规则链不存则添加否则更新，子节点不存在更新不成功
+// 如果chainId和ruleNodeId为空更新根规则链
+// chainId 子规则链，如果空，则表示更新根规则链
+// ruleNodeId 要更新的子节点或者子规则链
+// dsl 子节点/子规则链配置
 func (e *RuleEngine) ReloadChild(chainId types.RuleNodeId, ruleNodeId types.RuleNodeId, dsl []byte) error {
 	if e.rootRuleChainCtx == nil {
 		return errors.New("ReloadNode error.RuleEngine not initialized")
@@ -312,7 +312,7 @@ func (e *RuleEngine) Initialized() bool {
 	return e.rootRuleChainCtx != nil
 }
 
-//RootRuleChainCtx 获取根规则链
+// RootRuleChainCtx 获取根规则链
 func (e *RuleEngine) RootRuleChainCtx() *RuleChainCtx {
 	return e.rootRuleChainCtx
 }
@@ -325,21 +325,21 @@ func (e *RuleEngine) Stop() {
 }
 
 // OnMsg 把消息交给规则引擎处理，异步执行
-//根据规则链节点配置和连接关系处理消息
+// 根据规则链节点配置和连接关系处理消息
 func (e *RuleEngine) OnMsg(msg types.RuleMsg) {
 	e.OnMsgWithOptions(msg)
 }
 
 // OnMsgWithEndFunc 把消息交给规则引擎处理，异步执行
-//endFunc 用于数据经过规则链执行完的回调，用于获取规则链处理结果数据。注意：如果规则链有多个结束点，回调函数则会执行多次
+// endFunc 用于数据经过规则链执行完的回调，用于获取规则链处理结果数据。注意：如果规则链有多个结束点，回调函数则会执行多次
 func (e *RuleEngine) OnMsgWithEndFunc(msg types.RuleMsg, endFunc func(msg types.RuleMsg, err error)) {
 	e.OnMsgWithOptions(msg, types.WithEndFunc(endFunc))
 }
 
 // OnMsgWithOptions 把消息交给规则引擎处理，异步执行
-//可以携带context选项和结束回调选项
-//context 用于不同组件实例数据共享
-//endFunc 用于数据经过规则链执行完的回调，用于获取规则链处理结果数据。注意：如果规则链有多个结束点，回调函数则会执行多次
+// 可以携带context选项和结束回调选项
+// context 用于不同组件实例数据共享
+// endFunc 用于数据经过规则链执行完的回调，用于获取规则链处理结果数据。注意：如果规则链有多个结束点，回调函数则会执行多次
 func (e *RuleEngine) OnMsgWithOptions(msg types.RuleMsg, opts ...types.RuleContextOption) {
 	if e.rootRuleChainCtx != nil {
 		rootCtx := e.rootRuleChainCtx.rootRuleContext.(*DefaultRuleContext)
@@ -375,7 +375,7 @@ func WithConfig(config types.Config) RuleEngineOption {
 	}
 }
 
-//WithAddSubChain 添加子规则链选项
+// WithAddSubChain 添加子规则链选项
 func WithAddSubChain(subChainId string, subChain []byte) RuleEngineOption {
 	return func(re *RuleEngine) error {
 		if re.subRuleChains == nil {

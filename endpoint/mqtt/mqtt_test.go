@@ -2,11 +2,11 @@ package mqtt
 
 import (
 	"fmt"
-	"github.com/rulego/rulego"
-	"github.com/rulego/rulego/api/types"
-	"github.com/rulego/rulego/components/mqtt"
-	"github.com/rulego/rulego/endpoint"
-	"github.com/rulego/rulego/test/assert"
+	"github.com/2018yuli/rulego"
+	"github.com/2018yuli/rulego/api/types"
+	"github.com/2018yuli/rulego/components/mqtt"
+	"github.com/2018yuli/rulego/endpoint"
+	"github.com/2018yuli/rulego/test/assert"
 	"os"
 	"os/signal"
 	"testing"

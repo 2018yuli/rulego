@@ -18,13 +18,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/rulego/rulego"
-	"github.com/rulego/rulego/api/types"
+	"github.com/2018yuli/rulego"
+	"github.com/2018yuli/rulego/api/types"
 	"time"
 )
 
-//js处理后，并调用http服务对数据进行增加处理，并得到响应结果，后继续处理http响应的body数据
-//如果http请求失败记录日志
+// js处理后，并调用http服务对数据进行增加处理，并得到响应结果，后继续处理http响应的body数据
+// 如果http请求失败记录日志
 func main() {
 
 	config := rulego.NewConfig()

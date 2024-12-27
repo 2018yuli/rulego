@@ -17,12 +17,12 @@
 package main
 
 import (
-	"github.com/rulego/rulego"
-	"github.com/rulego/rulego/api/types"
+	"github.com/2018yuli/rulego"
+	"github.com/2018yuli/rulego/api/types"
 	"time"
 )
 
-//处理规则链，如果温度大于50，则温度异常调用api推送告警，否则记录日志
+// 处理规则链，如果温度大于50，则温度异常调用api推送告警，否则记录日志
 func main() {
 	//创建rule config
 	config := rulego.NewConfig()

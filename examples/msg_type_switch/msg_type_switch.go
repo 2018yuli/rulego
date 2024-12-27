@@ -17,12 +17,12 @@
 package main
 
 import (
-	"github.com/rulego/rulego"
-	"github.com/rulego/rulego/api/types"
+	"github.com/2018yuli/rulego"
+	"github.com/2018yuli/rulego/api/types"
 	"time"
 )
 
-//根据不同消息类型，路由到不同节点处理
+// 根据不同消息类型，路由到不同节点处理
 func main() {
 
 	config := rulego.NewConfig()

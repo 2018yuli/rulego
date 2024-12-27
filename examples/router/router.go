@@ -17,17 +17,17 @@
 package main
 
 import (
-	"github.com/rulego/rulego"
-	"github.com/rulego/rulego/api/types"
-	"github.com/rulego/rulego/components/mqtt"
-	"github.com/rulego/rulego/endpoint"
-	mqttEndpoint "github.com/rulego/rulego/endpoint/mqtt"
-	"github.com/rulego/rulego/endpoint/rest"
+	"github.com/2018yuli/rulego"
+	"github.com/2018yuli/rulego/api/types"
+	"github.com/2018yuli/rulego/components/mqtt"
+	"github.com/2018yuli/rulego/endpoint"
+	mqttEndpoint "github.com/2018yuli/rulego/endpoint/mqtt"
+	"github.com/2018yuli/rulego/endpoint/rest"
 )
 
-//使用相同路由逻辑处理http和mqtt数据
-//HTTP POST http://127.0.0.1:9090/api/v1/msg
-//MQTT pub topic /api/v1/msg
+// 使用相同路由逻辑处理http和mqtt数据
+// HTTP POST http://127.0.0.1:9090/api/v1/msg
+// MQTT pub topic /api/v1/msg
 func main() {
 	config := rulego.NewConfig(types.WithDefaultPool())
 	//定义路由 采用配置方式调用node组件

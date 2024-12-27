@@ -17,7 +17,7 @@
 package maps
 
 import (
-	"github.com/rulego/rulego/test/assert"
+	"github.com/2018yuli/rulego/test/assert"
 	"testing"
 )
 

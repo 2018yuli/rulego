@@ -19,8 +19,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/rulego/rulego"
-	"github.com/rulego/rulego/api/types"
+	"github.com/2018yuli/rulego"
+	"github.com/2018yuli/rulego/api/types"
 	"time"
 )
 
@@ -31,7 +31,7 @@ var (
 	addShareValue = "addShareValue"
 )
 
-//演示自定义组件
+// 演示自定义组件
 func main() {
 
 	//注册自定义组件

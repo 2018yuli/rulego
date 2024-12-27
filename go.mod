@@ -1,4 +1,4 @@
-module github.com/rulego/rulego
+module github.com/2018yuli/rulego
 
 go 1.18
 

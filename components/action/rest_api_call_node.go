@@ -32,9 +32,9 @@ import (
 	"bytes"
 	"crypto/tls"
 	"fmt"
-	"github.com/rulego/rulego/api/types"
-	"github.com/rulego/rulego/utils/maps"
-	"github.com/rulego/rulego/utils/str"
+	"github.com/2018yuli/rulego/api/types"
+	"github.com/2018yuli/rulego/utils/maps"
+	"github.com/2018yuli/rulego/utils/str"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -47,7 +47,7 @@ func init() {
 	Registry.Add(&RestApiCallNode{})
 }
 
-//存在到metadata key
+// 存在到metadata key
 const (
 	//http响应状态
 	status = "status"
@@ -57,7 +57,7 @@ const (
 	errorBody = "errorBody"
 )
 
-//RestApiCallNodeConfiguration rest配置
+// RestApiCallNodeConfiguration rest配置
 type RestApiCallNodeConfiguration struct {
 	//RestEndpointUrlPattern HTTP URL地址目标,可以使用 ${metaKeyName} 替换元数据中的变量
 	RestEndpointUrlPattern string
@@ -85,9 +85,9 @@ type RestApiCallNodeConfiguration struct {
 	ProxyScheme string
 }
 
-//RestApiCallNode 将通过REST API调用<code> GET | POST | PUT | DELETE </ code>到外部REST服务。
-//如果请求成功，把HTTP响应消息发送到`Success`链, 否则发到`Failure`链，
-//metaData.status记录响应错误码和metaData.errorBody记录错误信息。
+// RestApiCallNode 将通过REST API调用<code> GET | POST | PUT | DELETE </ code>到外部REST服务。
+// 如果请求成功，把HTTP响应消息发送到`Success`链, 否则发到`Failure`链，
+// metaData.status记录响应错误码和metaData.errorBody记录错误信息。
 type RestApiCallNode struct {
 	//节点配置
 	config RestApiCallNodeConfiguration
@@ -95,7 +95,7 @@ type RestApiCallNode struct {
 	httpClient *http.Client
 }
 
-//Type 组件类型
+// Type 组件类型
 func (x *RestApiCallNode) Type() string {
 	return "restApiCall"
 }
@@ -111,7 +111,7 @@ func (x *RestApiCallNode) New() types.Node {
 	return &RestApiCallNode{config: config}
 }
 
-//Init 初始化
+// Init 初始化
 func (x *RestApiCallNode) Init(ruleConfig types.Config, configuration types.Configuration) error {
 	err := maps.Map2Struct(configuration, &x.config)
 	if err == nil {
@@ -121,7 +121,7 @@ func (x *RestApiCallNode) Init(ruleConfig types.Config, configuration types.Conf
 	return err
 }
 
-//OnMsg 处理消息
+// OnMsg 处理消息
 func (x *RestApiCallNode) OnMsg(ctx types.RuleContext, msg types.RuleMsg) error {
 	metaData := msg.Metadata.Values()
 	endpointUrl := str.SprintfDict(x.config.RestEndpointUrlPattern, metaData)
@@ -161,7 +161,7 @@ func (x *RestApiCallNode) OnMsg(ctx types.RuleContext, msg types.RuleMsg) error 
 	return nil
 }
 
-//Destroy 销毁
+// Destroy 销毁
 func (x *RestApiCallNode) Destroy() {
 }
 

@@ -19,12 +19,12 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/rulego/rulego"
-	"github.com/rulego/rulego/api/types"
-	"github.com/rulego/rulego/components/mqtt"
-	"github.com/rulego/rulego/endpoint"
-	endpointMqtt "github.com/rulego/rulego/endpoint/mqtt"
-	endpointRest "github.com/rulego/rulego/endpoint/rest"
+	"github.com/2018yuli/rulego"
+	"github.com/2018yuli/rulego/api/types"
+	"github.com/2018yuli/rulego/components/mqtt"
+	"github.com/2018yuli/rulego/endpoint"
+	endpointMqtt "github.com/2018yuli/rulego/endpoint/mqtt"
+	endpointRest "github.com/2018yuli/rulego/endpoint/rest"
 	"log"
 	"net/http"
 	//_ "net/http/pprof"
@@ -140,7 +140,7 @@ func main() {
 
 }
 
-//rest服务 接收端点
+// rest服务 接收端点
 func restServe(logger *log.Logger, addr string) {
 	logger.Print("server initialised.")
 	restEndpoint := &endpointRest.Rest{
@@ -194,7 +194,7 @@ func restServe(logger *log.Logger, addr string) {
 	_ = restEndpoint.Start()
 }
 
-//获取DSL
+// 获取DSL
 func getDsl(nodeId string, exchange *endpoint.Exchange) {
 	var def []byte
 	if nodeId == "" {
@@ -208,7 +208,7 @@ func getDsl(nodeId string, exchange *endpoint.Exchange) {
 	exchange.Out.SetBody(def)
 }
 
-//更新DSL
+// 更新DSL
 func reloadDsl(nodeId string, exchange *endpoint.Exchange) {
 	var err error
 	if nodeId == "" {

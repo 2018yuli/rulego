@@ -19,8 +19,8 @@ package js
 import (
 	"errors"
 	"fmt"
+	"github.com/2018yuli/rulego/api/types"
 	"github.com/dop251/goja"
-	"github.com/rulego/rulego/api/types"
 	"sync"
 	"time"
 )
@@ -34,14 +34,14 @@ func closeStateChan(state chan int) {
 	close(state)
 }
 
-//GojaJsEngine goja js引擎
+// GojaJsEngine goja js引擎
 type GojaJsEngine struct {
 	vmPool   sync.Pool
 	jsScript string
 	config   types.Config
 }
 
-//NewGojaJsEngine 创建一个新的js引擎实例
+// NewGojaJsEngine 创建一个新的js引擎实例
 func NewGojaJsEngine(config types.Config, jsScript string, vars map[string]interface{}) *GojaJsEngine {
 	//defaultAntsPool, _ := ants.NewPool(config.MaxTaskPool)
 	jsEngine := &GojaJsEngine{

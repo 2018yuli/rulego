@@ -19,11 +19,11 @@ package rest
 import (
 	"context"
 	"errors"
+	"github.com/2018yuli/rulego/api/types"
+	"github.com/2018yuli/rulego/endpoint"
+	"github.com/2018yuli/rulego/utils/maps"
+	"github.com/2018yuli/rulego/utils/str"
 	"github.com/julienschmidt/httprouter"
-	"github.com/rulego/rulego/api/types"
-	"github.com/rulego/rulego/endpoint"
-	"github.com/rulego/rulego/utils/maps"
-	"github.com/rulego/rulego/utils/str"
 	"io/ioutil"
 	"net/http"
 	"net/textproto"
@@ -35,7 +35,7 @@ const (
 	JsonContextType = "application/json"
 )
 
-//RequestMessage http请求消息
+// RequestMessage http请求消息
 type RequestMessage struct {
 	request *http.Request
 	body    []byte
@@ -94,7 +94,7 @@ func (r *RequestMessage) Request() *http.Request {
 	return r.request
 }
 
-//ResponseMessage http响应消息
+// ResponseMessage http响应消息
 type ResponseMessage struct {
 	request  *http.Request
 	response http.ResponseWriter
@@ -139,14 +139,14 @@ func (r *ResponseMessage) Response() http.ResponseWriter {
 	return r.response
 }
 
-//Config Rest 服务配置
+// Config Rest 服务配置
 type Config struct {
 	Server      string
 	CertFile    string
 	CertKeyFile string
 }
 
-//Rest 接收端端点
+// Rest 接收端端点
 type Rest struct {
 	endpoint.BaseEndpoint
 	//配置
@@ -157,7 +157,7 @@ type Rest struct {
 	server *http.Server
 }
 
-//Type 组件类型
+// Type 组件类型
 func (rest *Rest) Type() string {
 	return "http"
 }
@@ -166,14 +166,14 @@ func (rest *Rest) New() types.Node {
 	return &Rest{}
 }
 
-//Init 初始化
+// Init 初始化
 func (rest *Rest) Init(ruleConfig types.Config, configuration types.Configuration) error {
 	err := maps.Map2Struct(configuration, &rest.Config)
 	rest.RuleConfig = ruleConfig
 	return err
 }
 
-//Destroy 销毁
+// Destroy 销毁
 func (rest *Rest) Destroy() {
 	_ = rest.Close()
 }

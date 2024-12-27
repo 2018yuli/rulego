@@ -17,24 +17,25 @@
 package action
 
 import (
-	"github.com/rulego/rulego/api/types"
-	"github.com/rulego/rulego/components/mqtt"
-	"github.com/rulego/rulego/utils/maps"
-	"github.com/rulego/rulego/utils/str"
+	"github.com/2018yuli/rulego/api/types"
+	"github.com/2018yuli/rulego/components/mqtt"
+	"github.com/2018yuli/rulego/utils/maps"
+	"github.com/2018yuli/rulego/utils/str"
 	"time"
 )
 
-//规则链节点配置示例：
-// {
-//        "id": "s3",
-//        "type": "mqttClient",
-//        "name": "mqtt推送数据",
-//        "debugMode": false,
-//        "configuration": {
-//          "Server": "127.0.0.1:1883",
-//          "Topic": "/device/msg"
-//        }
-//      }
+// 规则链节点配置示例：
+//
+//	{
+//	       "id": "s3",
+//	       "type": "mqttClient",
+//	       "name": "mqtt推送数据",
+//	       "debugMode": false,
+//	       "configuration": {
+//	         "Server": "127.0.0.1:1883",
+//	         "Topic": "/device/msg"
+//	       }
+//	     }
 func init() {
 	Registry.Add(&MqttClientNode{})
 }
@@ -74,7 +75,7 @@ type MqttClientNode struct {
 	mqttClient *mqtt.Client
 }
 
-//Type 组件类型
+// Type 组件类型
 func (x *MqttClientNode) Type() string {
 	return "mqttClient"
 }
@@ -83,7 +84,7 @@ func (x *MqttClientNode) New() types.Node {
 	return &MqttClientNode{}
 }
 
-//Init 初始化
+// Init 初始化
 func (x *MqttClientNode) Init(ruleConfig types.Config, configuration types.Configuration) error {
 	err := maps.Map2Struct(configuration, &x.config)
 	if err == nil {
@@ -92,7 +93,7 @@ func (x *MqttClientNode) Init(ruleConfig types.Config, configuration types.Confi
 	return err
 }
 
-//OnMsg 处理消息
+// OnMsg 处理消息
 func (x *MqttClientNode) OnMsg(ctx types.RuleContext, msg types.RuleMsg) error {
 	topic := str.SprintfDict(x.config.Topic, msg.Metadata.Values())
 	err := x.mqttClient.Publish(topic, x.config.QOS, []byte(msg.Data))
@@ -104,7 +105,7 @@ func (x *MqttClientNode) OnMsg(ctx types.RuleContext, msg types.RuleMsg) error {
 	return err
 }
 
-//Destroy 销毁
+// Destroy 销毁
 func (x *MqttClientNode) Destroy() {
 	if x.mqttClient != nil {
 		_ = x.mqttClient.Close()

@@ -1,11 +1,11 @@
 package rest
 
 import (
-	"github.com/rulego/rulego"
-	"github.com/rulego/rulego/api/types"
-	"github.com/rulego/rulego/components/action"
-	"github.com/rulego/rulego/endpoint"
-	"github.com/rulego/rulego/test/assert"
+	"github.com/2018yuli/rulego"
+	"github.com/2018yuli/rulego/api/types"
+	"github.com/2018yuli/rulego/components/action"
+	"github.com/2018yuli/rulego/endpoint"
+	"github.com/2018yuli/rulego/test/assert"
 	"net/http"
 	"os"
 	"testing"

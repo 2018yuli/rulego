@@ -17,7 +17,7 @@
 package str
 
 import (
-	"github.com/rulego/rulego/test/assert"
+	"github.com/2018yuli/rulego/test/assert"
 	"reflect"
 	"testing"
 )

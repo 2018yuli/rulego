@@ -17,15 +17,15 @@
 package main
 
 import (
-	"github.com/rulego/rulego"
-	"github.com/rulego/rulego/api/types"
+	"github.com/2018yuli/rulego"
+	"github.com/2018yuli/rulego/api/types"
 	"time"
 )
 
-//测试数据库操作组件dbClient
-//dbClient支持对数据库的增、删、修改、查
-//dbClient组件查询的数据可以继续使用其它组件对数据进行处理，
-//例如：使用`jsTransform`组件对数据进行处理、把从数据库查询数据通过`restApiCall`组件和其他系统集成
+// 测试数据库操作组件dbClient
+// dbClient支持对数据库的增、删、修改、查
+// dbClient组件查询的数据可以继续使用其它组件对数据进行处理，
+// 例如：使用`jsTransform`组件对数据进行处理、把从数据库查询数据通过`restApiCall`组件和其他系统集成
 func main() {
 
 	config := rulego.NewConfig()

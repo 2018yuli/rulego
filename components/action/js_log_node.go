@@ -29,18 +29,18 @@ package action
 import (
 	"errors"
 	"fmt"
-	"github.com/rulego/rulego/api/types"
-	"github.com/rulego/rulego/components/js"
-	"github.com/rulego/rulego/utils/json"
-	"github.com/rulego/rulego/utils/maps"
+	"github.com/2018yuli/rulego/api/types"
+	"github.com/2018yuli/rulego/components/js"
+	"github.com/2018yuli/rulego/utils/json"
+	"github.com/2018yuli/rulego/utils/maps"
 )
 
-//注册节点
+// 注册节点
 func init() {
 	Registry.Add(&LogNode{})
 }
 
-//LogNodeConfiguration 节点配置
+// LogNodeConfiguration 节点配置
 type LogNodeConfiguration struct {
 	//JsScript 只配置函数体脚本内容，对消息进行格式化，脚本返回值string
 	//例如
@@ -51,12 +51,12 @@ type LogNodeConfiguration struct {
 	JsScript string
 }
 
-//LogNode 使用JS脚本将传入消息转换为字符串，并将最终值记录到日志文件中
-//使用`types.Config.Logger`记录日志
-//消息体可以通过`msg`变量访问，msg 是string类型。例如:`return msg.temperature > 50;`
-//消息元数据可以通过`metadata`变量访问。例如 `metadata.customerName === 'Lala';`
-//消息类型可以通过`msgType`变量访问.
-//脚本执行成功，发送信息到`Success`链, 否则发到`Failure`链。
+// LogNode 使用JS脚本将传入消息转换为字符串，并将最终值记录到日志文件中
+// 使用`types.Config.Logger`记录日志
+// 消息体可以通过`msg`变量访问，msg 是string类型。例如:`return msg.temperature > 50;`
+// 消息元数据可以通过`metadata`变量访问。例如 `metadata.customerName === 'Lala';`
+// 消息类型可以通过`msgType`变量访问.
+// 脚本执行成功，发送信息到`Success`链, 否则发到`Failure`链。
 type LogNode struct {
 	//节点配置
 	config LogNodeConfiguration
@@ -66,7 +66,7 @@ type LogNode struct {
 	logger types.Logger
 }
 
-//Type 组件类型
+// Type 组件类型
 func (x *LogNode) Type() string {
 	return "log"
 }
@@ -75,7 +75,7 @@ func (x *LogNode) New() types.Node {
 	return &LogNode{}
 }
 
-//Init 初始化
+// Init 初始化
 func (x *LogNode) Init(ruleConfig types.Config, configuration types.Configuration) error {
 	err := maps.Map2Struct(configuration, &x.config)
 	if err == nil {
@@ -86,7 +86,7 @@ func (x *LogNode) Init(ruleConfig types.Config, configuration types.Configuratio
 	return err
 }
 
-//OnMsg 处理消息
+// OnMsg 处理消息
 func (x *LogNode) OnMsg(ctx types.RuleContext, msg types.RuleMsg) error {
 	var data interface{} = msg.Data
 	if msg.DataType == types.JSON {
@@ -110,7 +110,7 @@ func (x *LogNode) OnMsg(ctx types.RuleContext, msg types.RuleMsg) error {
 	return err
 }
 
-//Destroy 销毁
+// Destroy 销毁
 func (x *LogNode) Destroy() {
 	x.jsEngine.Stop()
 }

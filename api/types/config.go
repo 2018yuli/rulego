@@ -17,7 +17,7 @@
 package types
 
 import (
-	"github.com/rulego/rulego/pool"
+	"github.com/2018yuli/rulego/pool"
 	"math"
 	"time"
 )

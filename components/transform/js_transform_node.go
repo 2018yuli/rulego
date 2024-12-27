@@ -28,18 +28,18 @@ package transform
 //      }
 import (
 	"fmt"
-	"github.com/rulego/rulego/api/types"
-	"github.com/rulego/rulego/components/js"
-	"github.com/rulego/rulego/utils/json"
-	"github.com/rulego/rulego/utils/maps"
-	string2 "github.com/rulego/rulego/utils/str"
+	"github.com/2018yuli/rulego/api/types"
+	"github.com/2018yuli/rulego/components/js"
+	"github.com/2018yuli/rulego/utils/json"
+	"github.com/2018yuli/rulego/utils/maps"
+	string2 "github.com/2018yuli/rulego/utils/str"
 )
 
 func init() {
 	Registry.Add(&JsTransformNode{})
 }
 
-//JsTransformNodeConfiguration 节点配置
+// JsTransformNodeConfiguration 节点配置
 type JsTransformNodeConfiguration struct {
 	//JsScript 配置函数体脚本内容
 	//对msg、metadata、msgType 进行转换、增强
@@ -49,19 +49,19 @@ type JsTransformNodeConfiguration struct {
 	JsScript string
 }
 
-//JsTransformNode 使用JavaScript更改消息metadata，msg或msgType
-//JavaScript 函数接收3个参数：
-//metadata:是消息的 metadata
-//msg:是消息的payload
-//msgType:是消息的 type
-//法返回结构:return {'msg':msg,'metadata':metadata,'msgType':msgType};
-//脚本执行成功，发送信息到`Success`链, 否则发到`Failure`链。
+// JsTransformNode 使用JavaScript更改消息metadata，msg或msgType
+// JavaScript 函数接收3个参数：
+// metadata:是消息的 metadata
+// msg:是消息的payload
+// msgType:是消息的 type
+// 法返回结构:return {'msg':msg,'metadata':metadata,'msgType':msgType};
+// 脚本执行成功，发送信息到`Success`链, 否则发到`Failure`链。
 type JsTransformNode struct {
 	config   JsTransformNodeConfiguration
 	jsEngine types.JsEngine
 }
 
-//Type 组件类型
+// Type 组件类型
 func (x *JsTransformNode) Type() string {
 	return "jsTransform"
 }
@@ -70,7 +70,7 @@ func (x *JsTransformNode) New() types.Node {
 	return &JsTransformNode{}
 }
 
-//Init 初始化
+// Init 初始化
 func (x *JsTransformNode) Init(ruleConfig types.Config, configuration types.Configuration) error {
 	err := maps.Map2Struct(configuration, &x.config)
 	if err == nil {
@@ -80,7 +80,7 @@ func (x *JsTransformNode) Init(ruleConfig types.Config, configuration types.Conf
 	return err
 }
 
-//OnMsg 处理消息
+// OnMsg 处理消息
 func (x *JsTransformNode) OnMsg(ctx types.RuleContext, msg types.RuleMsg) error {
 	var data interface{} = msg.Data
 	if msg.DataType == types.JSON {
@@ -123,7 +123,7 @@ func (x *JsTransformNode) OnMsg(ctx types.RuleContext, msg types.RuleMsg) error 
 	return err
 }
 
-//Destroy 销毁
+// Destroy 销毁
 func (x *JsTransformNode) Destroy() {
 	x.jsEngine.Stop()
 }

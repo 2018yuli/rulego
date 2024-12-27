@@ -18,12 +18,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/rulego/rulego"
-	"github.com/rulego/rulego/api/types"
+	"github.com/2018yuli/rulego"
+	"github.com/2018yuli/rulego/api/types"
 	"time"
 )
 
-//js处理msg payload和元数据
+// js处理msg payload和元数据
 func main() {
 
 	config := rulego.NewConfig()

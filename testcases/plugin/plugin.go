@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/rulego/rulego/api/types"
+	"github.com/2018yuli/rulego/api/types"
 	"strings"
 	"time"
 )
@@ -9,7 +9,7 @@ import (
 //go build -buildmode=plugin -o plugin.so plugin.go # Compile the plugin and generate the plugin.so file
 //need to compile in mac or linux environment
 
-//Plugins plugin entry point
+// Plugins plugin entry point
 var Plugins MyPlugins
 
 type MyPlugins struct{}
@@ -21,7 +21,7 @@ func (p *MyPlugins) Components() []types.Node {
 	return []types.Node{&UpperNode{}, &TimeNode{}, &FilterNode{}}
 }
 
-//UpperNode A plugin that converts the message data to uppercase
+// UpperNode A plugin that converts the message data to uppercase
 type UpperNode struct{}
 
 func (n *UpperNode) Type() string {

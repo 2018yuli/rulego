@@ -18,7 +18,7 @@ package types
 
 import (
 	"context"
-	"github.com/rulego/rulego/utils/str"
+	"github.com/2018yuli/rulego/utils/str"
 	"sync"
 )
 
@@ -48,7 +48,7 @@ func (c Configuration) GetToString(key string) string {
 	return ""
 }
 
-//ComponentType 组件类型：规则节点或者子规则链
+// ComponentType 组件类型：规则节点或者子规则链
 type ComponentType int
 
 const (
@@ -56,20 +56,22 @@ const (
 	CHAIN
 )
 
-//PluginRegistry go plugin 方式提供节点组件接口
-//示例：
-//package main
-//var Plugins MyPlugins// plugin entry point
-//type MyPlugins struct{}
+// PluginRegistry go plugin 方式提供节点组件接口
+// 示例：
+// package main
+// var Plugins MyPlugins// plugin entry point
+// type MyPlugins struct{}
 //
-//func (p *MyPlugins) Init() error {
-//	return nil
-//}
-//func (p *MyPlugins) Components() []types.Node {
-//	return []types.Node{&UpperNode{}, &TimeNode{}, &FilterNode{}}//一个插件可以提供多个组件
-//}
-//go build -buildmode=plugin -o plugin.so plugin.go # 编译插件，生成plugin.so文件
-//rulego.Registry.RegisterPlugin("test", "./plugin.so")//注册到RuleGo默认注册器9
+//	func (p *MyPlugins) Init() error {
+//		return nil
+//	}
+//
+//	func (p *MyPlugins) Components() []types.Node {
+//		return []types.Node{&UpperNode{}, &TimeNode{}, &FilterNode{}}//一个插件可以提供多个组件
+//	}
+//
+// go build -buildmode=plugin -o plugin.so plugin.go # 编译插件，生成plugin.so文件
+// rulego.Registry.RegisterPlugin("test", "./plugin.so")//注册到RuleGo默认注册器9
 type PluginRegistry interface {
 	//Init 初始化
 	Init() error
@@ -77,7 +79,7 @@ type PluginRegistry interface {
 	Components() []Node
 }
 
-//ComponentRegistry 节点组件注册器
+// ComponentRegistry 节点组件注册器
 type ComponentRegistry interface {
 	//Register 注册组件，如果`node.Type()`已经存在则返回一个`已存在`错误
 	Register(node Node) error
@@ -93,10 +95,10 @@ type ComponentRegistry interface {
 }
 
 // Node 规则引擎节点组件接口
-//把业务封或者常用工具装成组件，然后通过规则链配置方式调用该组件
-//实现方式参考`components`包
-//然后注册到`RuleGo`默认注册器
-//rulego.Registry.Register(&MyNode{})
+// 把业务封或者常用工具装成组件，然后通过规则链配置方式调用该组件
+// 实现方式参考`components`包
+// 然后注册到`RuleGo`默认注册器
+// rulego.Registry.Register(&MyNode{})
 type Node interface {
 	//New 创建一个组件新实例
 	New() Node
@@ -114,7 +116,7 @@ type Node interface {
 	Destroy()
 }
 
-//NodeCtx 规则节点实例化上下文
+// NodeCtx 规则节点实例化上下文
 type NodeCtx interface {
 	Node
 	//IsDebugMode 该节点是否是调试模式
@@ -137,9 +139,9 @@ type NodeCtx interface {
 }
 
 // RuleContext 规则引擎消息处理上下文接口
-//处理把消息流转到下一个或者多个节点逻辑
-//根据规则链连接关系查找当前节点的下一个或者多个节点，然后调用对应节点：nextNode.OnMsg(ctx, msg)触发下一个节点的业务逻辑
-//另外处理节点OnDebug和OnEnd回调逻辑
+// 处理把消息流转到下一个或者多个节点逻辑
+// 根据规则链连接关系查找当前节点的下一个或者多个节点，然后调用对应节点：nextNode.OnMsg(ctx, msg)触发下一个节点的业务逻辑
+// 另外处理节点OnDebug和OnEnd回调逻辑
 type RuleContext interface {
 	//TellSuccess 通知规则引擎处理当前消息处理成功，并把消息通过`Success`关系发送到下一个节点
 	TellSuccess(msg RuleMsg)
@@ -183,7 +185,7 @@ func WithContext(c context.Context) RuleContextOption {
 	}
 }
 
-//JsEngine JavaScript脚本引擎
+// JsEngine JavaScript脚本引擎
 type JsEngine interface {
 	//Execute 执行js脚本指定函数，js脚本在JsEngine实例化的时候进行初始化
 	//functionName 执行的函数名
@@ -193,9 +195,9 @@ type JsEngine interface {
 	Stop()
 }
 
-//Parser 规则链定义文件DSL解析器
-//默认使用json方式，如果使用其他方式定义规则链，可以实现该接口
-//然后通过该方式注册到规则引擎中：`rulego.NewConfig(WithParser(&MyParser{})`
+// Parser 规则链定义文件DSL解析器
+// 默认使用json方式，如果使用其他方式定义规则链，可以实现该接口
+// 然后通过该方式注册到规则引擎中：`rulego.NewConfig(WithParser(&MyParser{})`
 type Parser interface {
 	// DecodeRuleChain 从描述文件解析规则链结构体
 	//parses a chain from an input source.
@@ -209,7 +211,7 @@ type Parser interface {
 	EncodeRuleNode(def interface{}) ([]byte, error)
 }
 
-//Pool 协程池
+// Pool 协程池
 type Pool interface {
 	//Submit 往协程池提交一个任务
 	//如果协程池满返回错误
@@ -218,7 +220,7 @@ type Pool interface {
 	Release()
 }
 
-//EmptyRuleNodeId 空节点ID
+// EmptyRuleNodeId 空节点ID
 var EmptyRuleNodeId = RuleNodeId{}
 
 // RuleNodeId 组件ID类型定义
@@ -229,7 +231,7 @@ type RuleNodeId struct {
 	Type ComponentType
 }
 
-//RuleNodeRelation 节点与节点之间关系
+// RuleNodeRelation 节点与节点之间关系
 type RuleNodeRelation struct {
 	//入组件ID
 	InId RuleNodeId
@@ -239,14 +241,14 @@ type RuleNodeRelation struct {
 	RelationType string
 }
 
-//SafeComponentSlice 安全的组件列表切片
+// SafeComponentSlice 安全的组件列表切片
 type SafeComponentSlice struct {
 	//组件列表
 	components []Node
 	sync.Mutex
 }
 
-//Add 线程安全地添加元素
+// Add 线程安全地添加元素
 func (p *SafeComponentSlice) Add(nodes ...Node) {
 	p.Lock()
 	defer p.Unlock()
@@ -255,7 +257,7 @@ func (p *SafeComponentSlice) Add(nodes ...Node) {
 	}
 }
 
-//Components 获取组件列表
+// Components 获取组件列表
 func (p *SafeComponentSlice) Components() []Node {
 	p.Lock()
 	defer p.Unlock()
