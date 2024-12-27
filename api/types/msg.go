@@ -21,7 +21,7 @@ import (
 	"time"
 )
 
-//DataType 消息数据类型
+// DataType 消息数据类型
 type DataType string
 
 const (
@@ -36,22 +36,22 @@ const (
 	MsgTypeKey  = "msgType"
 )
 
-//Metadata 规则引擎消息元数据
+// Metadata 规则引擎消息元数据
 type Metadata struct {
-	data map[string]string
+	data map[string]interface{}
 }
 
-//NewMetadata 创建一个新的规则引擎消息元数据实例
+// NewMetadata 创建一个新的规则引擎消息元数据实例
 func NewMetadata() Metadata {
 	return Metadata{
-		data: make(map[string]string),
+		data: make(map[string]interface{}),
 	}
 }
 
-//BuildMetadata 通过map，创建一个新的规则引擎消息元数据实例
-func BuildMetadata(data map[string]string) Metadata {
+// BuildMetadata 通过map，创建一个新的规则引擎消息元数据实例
+func BuildMetadata(data map[string]interface{}) Metadata {
 	metadata := Metadata{
-		data: make(map[string]string),
+		data: make(map[string]interface{}),
 	}
 	for k, v := range data {
 		metadata.data[k] = v
@@ -59,36 +59,36 @@ func BuildMetadata(data map[string]string) Metadata {
 	return metadata
 }
 
-//Copy 复制
+// Copy 复制
 func (md *Metadata) Copy() Metadata {
 	return BuildMetadata(md.data)
 }
 
-//Has 是否存在某个key
+// Has 是否存在某个key
 func (md *Metadata) Has(key string) bool {
 	_, ok := md.data[key]
 	return ok
 }
 
-//GetValue 通过key获取值
-func (md *Metadata) GetValue(key string) string {
+// GetValue 通过key获取值
+func (md *Metadata) GetValue(key string) interface{} {
 	v, _ := md.data[key]
 	return v
 }
 
-//PutValue 设置值
-func (md *Metadata) PutValue(key, value string) {
+// PutValue 设置值
+func (md *Metadata) PutValue(key string, value interface{}) {
 	if key != "" {
 		if md.data == nil {
-			md.data = make(map[string]string)
+			md.data = make(map[string]interface{})
 		}
 		md.data[key] = value
 	}
 }
 
-//Values 获取所有值
-func (md *Metadata) Values() map[string]string {
-	data := make(map[string]string)
+// Values 获取所有值
+func (md *Metadata) Values() map[string]interface{} {
+	data := make(map[string]interface{})
 	for k, v := range md.data {
 		data[k] = v
 	}
@@ -96,7 +96,7 @@ func (md *Metadata) Values() map[string]string {
 	return data
 }
 
-//RuleMsg 规则引擎消息
+// RuleMsg 规则引擎消息
 type RuleMsg struct {
 	// 消息时间戳
 	Ts int64 `json:"ts"`
@@ -115,7 +115,7 @@ type RuleMsg struct {
 	Metadata Metadata
 }
 
-//NewMsg 创建一个新的消息实例，并通过uuid生成消息ID
+// NewMsg 创建一个新的消息实例，并通过uuid生成消息ID
 func NewMsg(ts int64, msgType string, dataType DataType, metaData Metadata, data string) RuleMsg {
 	uuId, _ := uuid.NewV4()
 	return newMsg(uuId.String(), ts, msgType, dataType, metaData, data)
@@ -139,7 +139,7 @@ func newMsg(id string, ts int64, msgType string, dataType DataType, metaData Met
 	}
 }
 
-//Copy 复制
+// Copy 复制
 func (m *RuleMsg) Copy() RuleMsg {
 	return newMsg(m.Id, m.Ts, m.Type, m.DataType, m.Metadata.Copy(), m.Data)
 }
