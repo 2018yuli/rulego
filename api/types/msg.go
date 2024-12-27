@@ -41,7 +41,7 @@ type Metadata struct {
 	data map[string]interface{}
 }
 
-// NewMetadata 创建一个新的规则引擎消息元数据实例
+// NewMetadata 创建一个新的规则引擎消息元数据实例1
 func NewMetadata() Metadata {
 	return Metadata{
 		data: make(map[string]interface{}),
