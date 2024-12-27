@@ -44,7 +44,7 @@ func TestJsTransformNodeOnMsg(t *testing.T) {
 		assert.Equal(t, "TEST_MSG_TYPE2", msg.Type)
 		assert.Equal(t, types.Success, relationType)
 	})
-	metaData := types.BuildMetadata(make(map[string]string))
+	metaData := types.BuildMetadata(make(map[string]interface{}))
 	msg := ctx.NewMsg("TEST_MSG_TYPE_AA", metaData, "AA")
 	err = node.OnMsg(ctx, msg)
 	if err != nil {

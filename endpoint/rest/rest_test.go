@@ -75,7 +75,7 @@ func TestRestEndPoint(t *testing.T) {
 	router3 := endpoint.NewRouter().From("/api/v1/msg2Chain2/:msgType").Transform(func(router *endpoint.Router, exchange *endpoint.Exchange) bool {
 		msg := exchange.In.GetMsg()
 		//获取消息类型
-		msg.Type = msg.Metadata.GetValue("msgType")
+		msg.Type = msg.Metadata.GetValue("msgType").(string)
 
 		//从header获取用户ID
 		userId := exchange.In.Headers().Get("userId")
@@ -100,7 +100,7 @@ func TestRestEndPoint(t *testing.T) {
 	router4 := endpoint.NewRouter().From("/api/v1/msgToComponent1/:msgType").Transform(func(router *endpoint.Router, exchange *endpoint.Exchange) bool {
 		msg := exchange.In.GetMsg()
 		//获取消息类型
-		msg.Type = msg.Metadata.GetValue("msgType")
+		msg.Type = msg.Metadata.GetValue("msgType").(string)
 		return true
 	}).Process(func(router *endpoint.Router, exchange *endpoint.Exchange) bool {
 		//响应给客户端
@@ -122,7 +122,7 @@ func TestRestEndPoint(t *testing.T) {
 	router5 := endpoint.NewRouter().From("/api/v1/msgToComponent2/:msgType").Transform(func(router *endpoint.Router, exchange *endpoint.Exchange) bool {
 		msg := exchange.In.GetMsg()
 		//获取消息类型
-		msg.Type = msg.Metadata.GetValue("msgType")
+		msg.Type = msg.Metadata.GetValue("msgType").(string)
 		return true
 	}).Process(func(router *endpoint.Router, exchange *endpoint.Exchange) bool {
 		//响应给客户端

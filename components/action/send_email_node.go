@@ -52,7 +52,7 @@ type Email struct {
 	Body string
 }
 
-func (e *Email) createEmailMsg(metadata map[string]string) ([]byte, []string) {
+func (e *Email) createEmailMsg(metadata map[string]interface{}) ([]byte, []string) {
 	// 设置邮件主题
 	subject := string2.SprintfDict(e.Subject, metadata)
 	// 设置邮件正文，使用HTML格式
@@ -83,13 +83,13 @@ func (e *Email) createEmailMsg(metadata map[string]string) ([]byte, []string) {
 		body)
 	return msg, sendTo
 }
-func (e *Email) SendEmail(addr string, auth smtp.Auth, metadata map[string]string) error {
+func (e *Email) SendEmail(addr string, auth smtp.Auth, metadata map[string]interface{}) error {
 	msg, sendTo := e.createEmailMsg(metadata)
 	// 调用SendMail函数发送邮件
 	return smtp.SendMail(addr, auth, e.From, sendTo, msg)
 }
 
-func (e *Email) SendEmailWithTls(addr string, auth smtp.Auth, metadata map[string]string) error {
+func (e *Email) SendEmailWithTls(addr string, auth smtp.Auth, metadata map[string]interface{}) error {
 
 	msg, sendTo := e.createEmailMsg(metadata)
 

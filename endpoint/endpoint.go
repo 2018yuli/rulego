@@ -204,7 +204,7 @@ type To struct {
 }
 
 // ToStringByDict 转换路径中的变量，并返回最终字符串
-func (t *To) ToStringByDict(dict map[string]string) string {
+func (t *To) ToStringByDict(dict map[string]interface{}) string {
 	if t.HasVars {
 		return str.SprintfDict(t.ToPath, dict)
 	}

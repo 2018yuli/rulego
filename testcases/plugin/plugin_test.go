@@ -67,7 +67,7 @@ func TestPlugin(t *testing.T) {
 	defer ruleEngine.Stop()
 	for i := 0; i < maxTimes; i++ {
 		if err == nil {
-			metaData := types.BuildMetadata(make(map[string]string))
+			metaData := types.BuildMetadata(make(map[string]interface{}))
 			metaData.PutValue("productType", "test01")
 			msg := types.NewMsg(0, "TEST_MSG_TYPE", types.JSON, metaData, "aa")
 			//time.Sleep(time.Millisecond * 50)
@@ -109,7 +109,7 @@ func TestReloadPlugin(t *testing.T) {
 	defer ruleEngine.Stop()
 	for i := 0; i < maxTimes; i++ {
 		if err == nil {
-			metaData := types.BuildMetadata(make(map[string]string))
+			metaData := types.BuildMetadata(make(map[string]interface{}))
 			metaData.PutValue("productType", "test01")
 			msg := types.NewMsg(0, "TEST_MSG_TYPE", types.JSON, metaData, "aa")
 			//time.Sleep(time.Millisecond * 50)

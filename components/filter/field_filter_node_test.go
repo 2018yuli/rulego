@@ -39,7 +39,7 @@ func TestFieldFilterOnMsg1(t *testing.T) {
 	ctx := test.NewRuleContext(config, func(msg types.RuleMsg, relationType string) {
 		assert.Equal(t, types.True, relationType)
 	})
-	metaData := types.BuildMetadata(make(map[string]string))
+	metaData := types.BuildMetadata(make(map[string]interface{}))
 	metaData.PutValue("productType", "A001")
 	metaData.PutValue("name", "A001")
 	msg := ctx.NewMsg("TEST_MSG_TYPE_AA", metaData, `{"temperature":56}`)
@@ -64,7 +64,7 @@ func TestFieldFilterOnMsg2(t *testing.T) {
 	ctx := test.NewRuleContext(config, func(msg types.RuleMsg, relationType string) {
 		assert.Equal(t, types.False, relationType)
 	})
-	metaData := types.BuildMetadata(make(map[string]string))
+	metaData := types.BuildMetadata(make(map[string]interface{}))
 	metaData.PutValue("productType", "A001")
 	metaData.PutValue("name", "A001")
 	msg := ctx.NewMsg("TEST_MSG_TYPE_AA", metaData, `{"temperature":56}`)
@@ -90,7 +90,7 @@ func TestFieldFilterOnMsg3(t *testing.T) {
 	ctx := test.NewRuleContext(config, func(msg types.RuleMsg, relationType string) {
 		assert.Equal(t, types.True, relationType)
 	})
-	metaData := types.BuildMetadata(make(map[string]string))
+	metaData := types.BuildMetadata(make(map[string]interface{}))
 	metaData.PutValue("productType", "A001")
 	metaData.PutValue("name", "A001")
 	msg := ctx.NewMsg("TEST_MSG_TYPE_AA", metaData, `{"temperature":56}`)
@@ -116,7 +116,7 @@ func TestFieldFilterOnMsg4(t *testing.T) {
 	ctx := test.NewRuleContext(config, func(msg types.RuleMsg, relationType string) {
 		assert.Equal(t, types.True, relationType)
 	})
-	metaData := types.BuildMetadata(make(map[string]string))
+	metaData := types.BuildMetadata(make(map[string]interface{}))
 	msg := ctx.NewMsg("TEST_MSG_TYPE_AA", metaData, `{"temperature":56}`)
 	err = node.OnMsg(ctx, msg)
 	if err != nil {

@@ -37,7 +37,7 @@ func TestRestApiCallNodeOnMsg(t *testing.T) {
 		code := msg.Metadata.GetValue(statusCode)
 		assert.Equal(t, "404", code)
 	})
-	metaData := types.BuildMetadata(make(map[string]string))
+	metaData := types.BuildMetadata(make(map[string]interface{}))
 	msg := ctx.NewMsg("TEST_MSG_TYPE_AA", metaData, "{\"test\":\"AA\"}")
 	err = node.OnMsg(ctx, msg)
 	if err != nil {

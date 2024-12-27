@@ -64,7 +64,7 @@ func TestSendEmailNode(t *testing.T) {
 			t.Errorf("err=%s", err)
 		}
 	})
-	metaData := types.BuildMetadata(make(map[string]string))
+	metaData := types.BuildMetadata(make(map[string]interface{}))
 	msg := ctx.NewMsg("TEST_MSG_TYPE", metaData, "aa")
 	err = node.OnMsg(ctx, msg)
 	if err != nil {
@@ -112,7 +112,7 @@ func TestSendEmailNodeWithTls(t *testing.T) {
 			t.Errorf("err=%s", err)
 		}
 	})
-	metaData := types.BuildMetadata(make(map[string]string))
+	metaData := types.BuildMetadata(make(map[string]interface{}))
 	msg := ctx.NewMsg("TEST_MSG_TYPE", metaData, "aa")
 	err = node.OnMsg(ctx, msg)
 	if err != nil {

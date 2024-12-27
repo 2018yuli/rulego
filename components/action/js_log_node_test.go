@@ -38,7 +38,7 @@ func TestJsTransformNodeOnMsg(t *testing.T) {
 	ctx := test.NewRuleContext(config, func(msg types.RuleMsg, relationType string) {
 		assert.Equal(t, types.Success, relationType)
 	})
-	metaData := types.BuildMetadata(make(map[string]string))
+	metaData := types.BuildMetadata(make(map[string]interface{}))
 	metaData.PutValue("productType", "test")
 	msg := ctx.NewMsg("ACTIVITY_EVENT", metaData, "AA")
 	err = node.OnMsg(ctx, msg)

@@ -36,7 +36,7 @@ func TestMqttClientNodeOnMsg(t *testing.T) {
 	ctx := test.NewRuleContext(config, func(msg types.RuleMsg, relationType string) {
 		assert.Equal(t, types.Success, relationType)
 	})
-	metaData := types.BuildMetadata(make(map[string]string))
+	metaData := types.BuildMetadata(make(map[string]interface{}))
 	msg := ctx.NewMsg("TEST_MSG_TYPE_AA", metaData, "{\"test\":\"AA\"}")
 	err = node.OnMsg(ctx, msg)
 	if err != nil {

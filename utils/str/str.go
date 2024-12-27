@@ -39,7 +39,7 @@ func init() {
 // For example, SprintfDict(“Hello, ${name}!”, map[string]string{“name”: “Alice”}) returns “Hello, Alice!”.
 // If the pattern contains a key that is not in the dict, it will be left unchanged.
 // If the dict contains a key that is not in the pattern, it will be ignored.
-func SprintfDict(pattern string, dict map[string]string) string {
+func SprintfDict(pattern string, dict map[string]interface{}) string {
 	var result = pattern
 	for key, value := range dict {
 		result = ProcessVar(result, key, value)
@@ -47,9 +47,9 @@ func SprintfDict(pattern string, dict map[string]string) string {
 	return result
 }
 
-func ProcessVar(pattern, key, val string) string {
+func ProcessVar(pattern, key string, val interface{}) string {
 	varPattern := varPatternLeft + key + varPatternRight
-	return strings.Replace(pattern, varPattern, val, -1)
+	return strings.Replace(pattern, varPattern, fmt.Sprintf("%s", val), -1)
 }
 
 const randomStrOptions = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -116,12 +116,15 @@ func ToString(input interface{}) string {
 }
 
 // ToStringMapString 把interface类型 转 map[string]string类型
-func ToStringMapString(input interface{}) map[string]string {
-	var output = map[string]string{}
+func ToStringMapString(input interface{}) map[string]interface{} {
+	var output = map[string]interface{}{}
 
 	switch v := input.(type) {
 	case map[string]string:
-		return v
+		for k, val := range v {
+			output[ToString(k)] = ToString(val)
+		}
+		return output
 	case map[string]interface{}:
 		for k, val := range v {
 			output[ToString(k)] = ToString(val)

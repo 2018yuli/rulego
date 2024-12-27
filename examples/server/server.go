@@ -150,7 +150,7 @@ func restServe(logger *log.Logger, addr string) {
 	restEndpoint.POST(endpoint.NewRouter().From(msgPath).Transform(func(router *endpoint.Router, exchange *endpoint.Exchange) bool {
 		msg := exchange.In.GetMsg()
 		//获取消息类型
-		msg.Type = msg.Metadata.GetValue("msgType")
+		msg.Type = msg.Metadata.GetValue("msgType").(string)
 
 		//用户ID
 		userId := exchange.In.Headers().Get("userId")
@@ -172,7 +172,7 @@ func restServe(logger *log.Logger, addr string) {
 	//获取某个节点DSL
 	restEndpoint.GET(endpoint.NewRouter().From(ruleNodePath).Process(func(router *endpoint.Router, exchange *endpoint.Exchange) bool {
 		msg := exchange.In.GetMsg()
-		nodeId := msg.Metadata.GetValue("nodeId")
+		nodeId := msg.Metadata.GetValue("nodeId").(string)
 		getDsl(nodeId, exchange)
 		return true
 	}).End())
@@ -185,7 +185,7 @@ func restServe(logger *log.Logger, addr string) {
 	//修改某个节点DSL
 	restEndpoint.PUT(endpoint.NewRouter().From(ruleNodePath).Process(func(router *endpoint.Router, exchange *endpoint.Exchange) bool {
 		msg := exchange.In.GetMsg()
-		nodeId := msg.Metadata.GetValue("nodeId")
+		nodeId := msg.Metadata.GetValue("nodeId").(string)
 		reloadDsl(nodeId, exchange)
 		return true
 	}).End())

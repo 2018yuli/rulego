@@ -45,7 +45,7 @@ func TestJsSwitchNodeOnMsg(t *testing.T) {
 		i++
 
 	})
-	metaData := types.BuildMetadata(make(map[string]string))
+	metaData := types.BuildMetadata(make(map[string]interface{}))
 	msg := ctx.NewMsg("ACTIVITY_EVENT", metaData, "AA")
 	err = node.OnMsg(ctx, msg)
 	if err != nil {

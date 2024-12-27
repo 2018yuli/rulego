@@ -44,7 +44,7 @@ func TestJsFilterNodeOnMsg(t *testing.T) {
 		}
 
 	})
-	metaData := types.BuildMetadata(make(map[string]string))
+	metaData := types.BuildMetadata(make(map[string]interface{}))
 	msg := ctx.NewMsg("TEST_MSG_TYPE_AA", metaData, "AA")
 	err = node.OnMsg(ctx, msg)
 	if err != nil {
